@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CiclosFlorida</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="botonDep">Deportes</string>
+    <string name="botonEmp">Empresa</string>
+    <string name="botonInfo">Informática</string>
+    <string name="botonMedio">Medio</string>
+    <string name="botonSup">Superior</string>
+</resources>
