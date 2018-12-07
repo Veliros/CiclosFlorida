@@ -1,8 +1,11 @@
 package com.example.marta.ciclosflorida;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class CicloFlorida {
+public class CicloFlorida implements Parcelable {
     private String familiaProfessional;
     private String tipus;
     private String titol;
@@ -48,6 +51,39 @@ public class CicloFlorida {
         Descripcio = descripcio;
     }
 
+
+    protected CicloFlorida(Parcel in) {
+        familiaProfessional = in.readString();
+        tipus = in.readString();
+        titol = in.readString();
+        Descripcio = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(familiaProfessional);
+        dest.writeString(tipus);
+        dest.writeString(titol);
+        dest.writeString(Descripcio);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<CicloFlorida> CREATOR = new Parcelable.Creator<CicloFlorida>() {
+        @Override
+        public CicloFlorida createFromParcel(Parcel in) {
+            return new CicloFlorida(in);
+        }
+
+        @Override
+        public CicloFlorida[] newArray(int size) {
+            return new CicloFlorida[size];
+        }
+    };
     public void creaDades(){
         CicloFlorida c;
         ArrayList<CicloFlorida> llistat_titulacions = new ArrayList<CicloFlorida>();
