@@ -19,6 +19,8 @@ import java.util.ArrayList;
  * to handle interaction events.
  * Use the {@link Titulaciones#newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * @author marta, alex
  */
 public class Titulaciones extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -130,40 +132,46 @@ public class Titulaciones extends Fragment implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
+        StringBuilder sb = new StringBuilder();
+        // Lo mismo que en TipoCiclo.
         switch (v.getId()) {
             case R.id.btnEmpresa:
-                mListener.listado(listado);
+                for(CicloFlorida c : listado){
+                    if(c.getFamiliaProfessional().compareTo("EMPRESA") == 0) sb.append(c.toString() + "\n");
+                }
                 break;
             case R.id.btnSport:
-                mListener.listado(listado);
+                for(CicloFlorida c : listado){
+                    if(c.getFamiliaProfessional().compareTo("ESPORT") == 0) sb.append(c.toString() + "\n");
+                }
                 break;
             case R.id.btnInfo:
-                mListener.listado(listado);
+                for(CicloFlorida c : listado){
+                    if(c.getFamiliaProfessional().compareTo("INFROMÀTICA") == 0) sb.append(c.toString() + "\n");
+                }
                 break;
         }
+
+        mListener.listado(sb.toString());
 
     }
 
     /**
-     * Método de comprobación de titulaciones.
+     * Método para crear los datos.
      */
-    protected void comprobarTitulacion() {
-        String familiaProfesional = ciclo.getFamiliaProfessional();
-
-        for (CicloFlorida c : listado) {
-            switch (familiaProfesional) {
-                case "ESPORT":
-                    tvListado.setText("\tDeportes:\n" + c.toString());
-                    break;
-                case "EMPRESA":
-                    tvListado.setText("\tEmpresa:\n" + c.toString());
-                    break;
-                case "INFORMÀTICA":
-                    tvListado.setText("\tInformática:\n" + c.toString());
-                    break;
-            }
-        }
-
+    public void creaDades(){
+        ciclo = new CicloFlorida("ESPORT","Superior","Animació d'activitats físiques i esportives","Aquesta formació concertat de nivell superior cicle formes com un Tècnic Superior en activitats físiques i esportives, que està especialitzat en ensenyament i dinamització de jocs i activitats de fitness.");
+        listado.add(ciclo);
+        ciclo = new CicloFlorida("ESPORT","Mitjà","Conducción de actividades físico deportivas en el medio natural","Este Ciclo Formativo de Grado Medio te forma como Técnico/a en Conducción de actividades físico deportivas en el medio natural, permitiéndote la especialización posterior como Técnico de Actividades físico deportivas.");
+        listado.add(ciclo);
+        ciclo = new CicloFlorida("EMPRESA","Superior","Gestión de Ventas y Espacios Comerciales","Nuevo ciclo formativo de grado superior concertado por la GVA");
+        listado.add(ciclo);
+        ciclo = new CicloFlorida("EMPRESA","Superior","Marketing y publicidad","Este ciclo te prepara para definir y efectuar el seguimiento de las políticas de marketing de una empresa.");
+        ciclo = new CicloFlorida("EMPRESA","Superior","Administración y Finanzas / FP Dual BANKIA","Dentro de la modalidad de FP Dual, Florida Universitaria, en colaboración con Bankia, pone en marcha el Ciclo de Técnico/a Superior en Administración y Finanzas. Este Ciclo Formativo se desarrolla 100% en modalidad DUAL, con 9 meses de estancia en las sucursales de Bankia, formándote con una alta especialización en el ámbito financiero bancario.");
+        ciclo = new CicloFlorida("INFORMÀTICA","Mitjà","Sistemas Microinformáticos y Redes","Este Ciclo Formativo de Grado Medio concertado te forma como Técnico/a en Sistemas Microinformáticos y Redes, permitiéndote la especialización posterior en el desarrollo de aplicaciones o la administración de sistemas informáticos.");
+        ciclo = new CicloFlorida("INFORMÀTICA","Superior","Administración de Sistemas Informáticos y en Red","Este Ciclo Formativo de Grado Superior concertado te forma como profesional de la informática y las comunicaciones, especializado en la configuración, administración y mantenimiento de sistemas informáticos en red.");
+        ciclo = new CicloFlorida("INFORMÀTICA","Superior","Desarrollo de Aplicaciones Multiplataforma","Este NUEVO Ciclo Formativo de Grado Superior concertado te forma como profesional de la informática y las comunicaciones, especializado en el desarrollo, implantación y mantenimiento de aplicaciones para diferentes plataformas tecnológicas.");
+        ciclo = new CicloFlorida("INFORMÀTICA","Superior","Desarrollo de Aplicaciones Web","ste NUEVO Ciclo Formativo de Grado Superior privado te forma como profesional de la informática y las comunicaciones, especializado en el desarrollo, implantación y mantenimiento de aplicaciones web");
     }
 
 
@@ -176,7 +184,7 @@ public class Titulaciones extends Fragment implements View.OnClickListener {
          *
          * @param listado
          */
-        void listado(ArrayList<CicloFlorida> listado);
+        void listado(String listado);
 
     }
 }

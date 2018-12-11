@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -15,8 +16,10 @@ import java.util.ArrayList;
  * Activities that contain this fragment must implement the
  * Use the {@link TipoCiclo#newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * @author marta, alex
  */
-public class TipoCiclo extends Fragment {
+public class TipoCiclo extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,8 +29,10 @@ public class TipoCiclo extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    // Botones:
+    // Botones y textview:
     private Button gMedio, gSuperior;
+    private TextView tvListado;
+
     // ArrayLists:
     private ArrayList<CicloFlorida> listaGrados;
 
@@ -53,6 +58,10 @@ public class TipoCiclo extends Fragment {
         return fragment;
     }
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +71,13 @@ public class TipoCiclo extends Fragment {
         }
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,12 +87,48 @@ public class TipoCiclo extends Fragment {
         gMedio = (Button) v.findViewById(R.id.btnMedio);
         gSuperior = (Button) v.findViewById(R.id.btnSup);
 
+        tvListado = (TextView) v.findViewById(R.id.tvListado);
+
         return v;
     }
 
+    /**
+     *
+     */
     @Override
     public void onDetach() {
         super.onDetach();
     }
 
+    /**
+     * Detectar qué botón es:
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        StringBuilder sb = new StringBuilder();
+
+            switch (v.getId()) {
+                case R.id.btnMedio:
+                    // Recorre el ArrayList:
+                    for (CicloFlorida c : listaGrados) {
+                        // Coge el tipo que toca:
+                        if (c.getTipus().compareTo("MITJA") == 0) sb.append(c.toString() + "\n");
+                    }
+                    break;
+                case R.id.btnSup:
+                    for (CicloFlorida c : listaGrados) {
+                        if (c.getTipus().compareTo("SUPERIOR") == 0) sb.append(c.toString() + "\n");
+                    }
+                    break;
+                default: // En caso de que no sea ninguno de los dos va con todos.
+                    for (CicloFlorida c : listaGrados) {
+                        sb.append(c.toString() + "\n");
+                    }
+                    break;
+            }
+
+        tvListado.setText(sb.toString());
+    }
 }

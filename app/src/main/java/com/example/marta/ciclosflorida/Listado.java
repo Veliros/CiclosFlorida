@@ -15,6 +15,8 @@ import java.util.ArrayList;
  * Activities that contain this fragment must implement the
  * Use the {@link Listado#newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * @author marta, alex
  */
 public class Listado extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
