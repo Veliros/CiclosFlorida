@@ -94,4 +94,32 @@ public class Listado extends Fragment {
         super.onDetach();
     }
 
+    /**
+     * Pone los datos en el text view.
+     * @param listado
+     */
+    public void insertarDatos(ArrayList<CicloFlorida> listado){
+        StringBuilder sb = new StringBuilder();
+
+        for(CicloFlorida c : listado){
+            sb.append(c);
+        }
+
+        tvListado.setText(sb);
+    }
+
+    /**
+     * Borra el contenido del text view.
+     */
+    public void borrar(){
+        tvListado.setText("");
+    }
+
+    public Listado newInstance(ArrayList<CicloFlorida> listado) {
+        Listado fragment = new Listado();
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(ARG_PARAM1, listado);
+        fragment.setArguments(args);
+        return fragment;
+    }
 }
